@@ -8,6 +8,16 @@ module.exports = function(app, passport) {
         res.render('index.ejs'); // load the index.ejs file
     });
 
+    app.get('/newGame', function(req, res){
+        res.render('newgame.ejs', {
+          user : req.user // get the user out of session and pass to template
+        })
+    });
+
+    app.post('/newGame', function(req, res){
+      
+    });
+
     // =====================================
     // LOGIN ===============================
     // =====================================
