@@ -1,5 +1,7 @@
 // app/routes.js
-module.exports = function(app, passport) {
+module.exports = function(app, passport, Game) {
+
+ var Game = require('./models/game')
 
     // =====================================
     // HOME PAGE (with login links) ========
@@ -10,13 +12,27 @@ module.exports = function(app, passport) {
 
     app.get('/newGame', function(req, res){
         res.render('newgame.ejs', {
-          user : req.user // get the user out of session and pass to template
+          user : req.body.user // get the user out of session and pass to template
         })
     });
 
     app.post('/newGame', function(req, res){
-      
-    });
+        console.log(req.body.park);
+      var newGame = new Game({
+        park : req.body.park,
+        date : req.body.date,
+        time : req.body.time,
+        attending: 0
+      })
+
+        newGame.save(function (err, post) {
+          if (err) { return next(err) }
+            console.log(req.body)
+            res.redirect('/profile');
+        })
+
+      // newGame.post()
+  });
 
     // =====================================
     // LOGIN ===============================
@@ -58,9 +74,17 @@ module.exports = function(app, passport) {
     // we will want this protected so you have to be logged in to visit
     // we will use route middleware to verify this (the isLoggedIn function)
     app.get('/profile', isLoggedIn, function(req, res) {
-        res.render('profile.ejs', {
-            user : req.user // get the user out of session and pass to template
-        });
+      console.log(req)
+
+
+      Game.find({}, function(err, games) {
+            if (err) throw err;
+
+            res.render('profile.ejs', {games:games, user:req.user});
+
+      });
+
+
     });
 
     // =====================================

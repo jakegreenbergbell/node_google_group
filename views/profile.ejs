@@ -28,8 +28,8 @@
                     <p>
                         <strong>id</strong>: <%= user._id %><br>
                         <strong>email</strong>: <%= user.local.email %><br>
-                        <strong>password</strong>: <%= user.local.password %>
-                        <strong>events attending</strong>: <%= user.local.eventsAttending %>
+                        <strong>password</strong>: <%= user.local.password %><br>
+                        <strong>events attending</strong>: <%= user.local.eventsAttending %><br>
                     </p>
 
             </div>
@@ -51,17 +51,21 @@
         </div>
     </div>
 
-</div>
-<div>
-  <table>
-  <% for(var i=0; i<games.length; i++){ %>
-    <tr><td> <%= games[i].date =%></td>
-    <td><strong>Park: </strong> <%=games[i].park =%></td>
-    <td><strong>Time: </strong><%=games[i].time =%></td>
-    <td><strong>Amount attending: </strong><%=games[i].attending=%></td>
-  </tr>
-  <form action ="/addAttending"
-  <% } %>
+    <div>
+      <table>
+      <% for(var i=0; i < games.length; i++){ %>
+        <tr><td> <%= games[i].date %></td>
+        <td><strong>Park: </strong> <%= games[i].park %></td>
+        <td><strong>Time: </strong> <%= games[i].time %></td>
+        <td><strong>Amount attending: </strong><%= games[i].attending %></td>
+      </tr>
+
+
+       <% } %>
+    </table>
+    </div>
+
+
 </div>
 </body>
 </html>

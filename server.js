@@ -8,10 +8,11 @@ var morgan       = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser   = require('body-parser');
 var session      = require('express-session');
+var Game = require('./app/models/game');
 
 // Connect to DB
 //var configDB = require('./config/database.js');
-mongoose.connect('mongodb://malbinson:malbinson1@ds119503.mlab.com:19503/albinson');
+mongoose.connect('mongodb://jakegb:password1@ds139944.mlab.com:39944/pickupbasketball');
 
 // set up our express application
 app.set('view engine','ejs');
@@ -28,12 +29,11 @@ app.use(flash()); // use connect-flash for flash messages stored in session
 
 // routes ======================================================================
 // load our routes and pass in our app and fully configured passport
-require('./app/routes.js')(app, passport);
+require('./app/routes.js')(app, passport, Game);
 require('./config/passport')(passport); // pass passport for configuration
 
 //start server
-var port     = process.env.PORT || 3000;
+var port     = process.env.PORT || 4000;
 app.listen(port, () => {
     console.log('meow')
 })
-// fake
