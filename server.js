@@ -33,7 +33,7 @@ require('./app/routes.js')(app, passport, Game);
 require('./config/passport')(passport); // pass passport for configuration
 
 //start server
-var port     = process.env.PORT || 4000;
+var port = process.env.PORT || 80
 app.listen(port, () => {
     console.log('meow')
 })
